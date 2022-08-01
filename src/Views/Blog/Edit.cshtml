@@ -1,7 +1,7 @@
 @model Post
 @{
     var isNew = string.IsNullOrEmpty(Model.Title);
-    ViewData[Constants.Title] = "Edit " + (Model.Title ?? "new post");
+    ViewData[Constants.Title] = "修改 " + (Model.Title ?? "新建文章");
     var host = Context.Request.Host.ToString();
     var allCats = ViewData[Constants.AllCats] as List<string> ?? new List<string>();
     var allTags = ViewData[Constants.AllTags] as List<string> ?? new List<string>();
@@ -15,20 +15,20 @@
         <div asp-validation-summary="All"></div>
         <input type="hidden" asp-for="@Model.ID" />
 
-        <label asp-for="@Model.Title" class="label">Title</label>
-        <input asp-for="@Model.Title" required placeholder="Title of blog post" aria-describedby="desc_title" />
-        <span class="desc" id="desc_title">The title as it appears on the website</span>
+        <label asp-for="@Model.Title" class="label">标文章题</label>
+        <input asp-for="@Model.Title" required placeholder="文章标题" aria-describedby="desc_title" />
+        <span class="desc" id="desc_title">网站上出现的标题</span>
         <br />
 
         <label asp-for="@Model.Slug" class="label">Slug</label>
         <input asp-for="@Model.Slug" placeholder="The URL name" aria-describedby="desc_slug" />
-        <span class="desc" id="desc_slug">The part of the URL that identifies this blog post</span>
+        <span class="desc" id="desc_slug">标识此博客帖子的URL部分</span>
         <br />
 
-        <label for="categories" class="label">Categories</label>
+        <label for="categories" class="label">分类</label>
         <input type="text" name="selectcat" id="selectcat" aria-describedby="desc_categories" list="catlist" placeholder="@string.Join(", ", Model.Categories)"  />
         <input type="text" name="categories" id="categories" value="@string.Join(", ", Model.Categories)" hidden />
-        <span class="desc" id="desc_categories">Select, or build a comma separated list of keywords - to remove double the keyword</span>
+        <span class="desc" id="desc_categories">选择或构建一个逗号分隔的关键字列表-删除两个关键字</span>
         <datalist id="catlist">
             @foreach (var cat in allCats)
             {
@@ -37,10 +37,10 @@
             </datalist>
         <br />
 
-        <label for="tags" class="label">Tags</label>
+        <label for="tags" class="label">标签Tags</label>
         <input type="text" name="selecttag" id="selecttag" aria-describedby="desc_tags" list="taglist" placeholder="@string.Join(", ", Model.Tags)"  />
         <input type="text" name="tags" id="tags" value="@string.Join(", ", Model.Tags)" hidden />
-        <span class="desc" id="desc_tags">Select, or build a comma separated list of keywords - to remove double the keyword</span>
+        <span class="desc" id="desc_tags">选择或构建一个逗号分隔的关键字列表-删除两个关键字</span>
         <datalist id="taglist">
             @foreach (var tag in allTags)
             {
@@ -49,22 +49,22 @@
             </datalist>
         <br />
 
-        <label asp-for="@Model.Excerpt" class="label">Excerpt</label>
-        <textarea asp-for="@Model.Excerpt" rows="3" placeholder="Short description of blog post" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
-        <span class="desc" id="desc_excerpt">A brief description of the content of the post</span>
+        <label asp-for="@Model.Excerpt" class="label">摘录</label>
+        <textarea asp-for="@Model.Excerpt" rows="3" placeholder="博客文章的简短描述" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
+        <span class="desc" id="desc_excerpt">对帖子内容的简要描述</span>
         <br />
 
         <textarea asp-for="@Model.Content" rows="20" aria-label="Content">@Model.Content</textarea>
         <br />
 
-        <input type="submit" value="Save" title="Save the post" />
+        <input type="submit" value="保存文章" title="保存文章" />
 
         <input asp-for="@Model.IsPublished" />
-        <label asp-for="@Model.IsPublished">Is published</label>
+        <label asp-for="@Model.IsPublished">发布</label>
 
         @if (!isNew)
         {
-            <input type="submit" value="Delete..." class="delete" title="Delete the post..." asp-action="DeletePost" asp-route-id="@Model.ID" />
+            <input type="submit" value="Delete..." class="delete" title="删除此文章..." asp-action="DeletePost" asp-route-id="@Model.ID" />
         }
     </form>
 

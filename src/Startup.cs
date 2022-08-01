@@ -68,7 +68,7 @@ namespace Miniblog.Core
 
             if (this.Configuration.GetValue<bool>("forcessl"))
             {
-                app.UseHttpsRedirection();
+                //app.UseHttpsRedirection();
             }
 
             app.UseMetaWeblog("/metaweblog");

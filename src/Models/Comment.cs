@@ -15,6 +15,7 @@ namespace Miniblog.Core.Models
         [Required]
         public string Content { get; set; } = string.Empty;
 
+        //Emial格式验证
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
