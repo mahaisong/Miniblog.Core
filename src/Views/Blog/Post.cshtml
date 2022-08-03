@@ -64,7 +64,7 @@
 			</ul>
 		}
 
-		@if (settings.Value.DisplayComments)
+	@*	@if (settings.Value.DisplayComments)
 		{
 			<svg width="24" height="24" aria-hidden="true" role="img" aria-labelledby="_comments-@Model.ID" focusable="false" viewBox="0 0 24 24">
 				<title id="_comments-@Model.ID">评论</title>
@@ -74,14 +74,14 @@
 			<a href="@Model.GetLink()#comments" itemprop="discussionUrl" title="转到评论部分">
 				<span itemprop="commentCount">@Model.Comments.Count</span> @(Model.Comments.Count == 1 ? "评论" : "评论")
 			</a>
-		}
+		}*@
 
 		<meta itemprop="author" content="@settings.Value.Owner" />
 		<meta itemprop="dateModified" content="@Model.LastModified.ToString("s")" />
 		<meta itemprop="mainEntityOfPage" content="@(host + Model.GetLink())" />
 	</footer>
 </article>
-
+@*
 @if (showFullPost)
 {
     await Html.RenderPartialAsync("_SocialSharing", Model.Title);
@@ -91,7 +91,7 @@
     }
 
     @section Preload {
-        @* This lazy loads the stylesheet in a non-render blocking way *@
+      
         @if (settings.Value.DisplayComments)
         {
             <link rel="preload" href="~/css/comments.scss" as="style" />
@@ -103,7 +103,7 @@
             <script src="~/lib/prism/prism.js" async defer></script>
         }
     }
-}
+}*@
 
 @if (User.Identity.IsAuthenticated)
 {
